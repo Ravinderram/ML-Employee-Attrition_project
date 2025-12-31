@@ -1,7 +1,6 @@
 # predict.py
 import pandas as pd
 import joblib
-
 # Load preprocessing objects
 scaler = joblib.load("model/scaler.pkl")
 encoders = joblib.load("model/encoders.pkl")
