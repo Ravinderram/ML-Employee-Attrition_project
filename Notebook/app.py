@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from predict import predict_attrition
 st.set_page_config(
     page_title="Employee Attrition Prediction",
     layout="centered"
