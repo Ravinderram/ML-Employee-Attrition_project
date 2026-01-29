@@ -28,7 +28,6 @@ def _(df):
     # Show the first rows
     df.head()
 
-
     return
 
 
@@ -38,7 +37,6 @@ def _():
 
     top_n = mo.ui.slider(5, 30, value=10, label="Select number of top countries")
     top_n
-
     return (top_n,)
 
 
@@ -53,7 +51,6 @@ def _(df, top_n):
     )
 
     top_countries
-
     return n, top_countries
 
 
@@ -67,7 +64,6 @@ def _(n, plt, sns, top_countries):
     plt.ylabel('Country or region')
     plt.tight_layout()
     plt.show()
-
     return
 
 
