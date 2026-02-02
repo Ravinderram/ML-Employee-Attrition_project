@@ -1,10 +1,19 @@
-FROM python:3.11
+FROM python:3.12
+COPY --from=ghcr.io/astral-sh/uv:0.4.20 /uv /bin/uv
+
+RUN useradd -m -u 1000 user
+ENV PATH="/home/user/.local/bin:$PATH"
+ENV UV_SYSTEM_PYTHON=1
 
 WORKDIR /app
-COPY . /app
 
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --chown=user ./requirements.txt requirements.txt
+RUN uv pip install -r requirements.txt
 
-EXPOSE 7860
+COPY --chown=user . /app
+RUN mkdir -p /app/__marimo__ && \
+    chown -R user:user /app && \
+    chmod -R 755 /app
+USER user
 
-CMD ["marimo", "run", "ranjit.py", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["marimo", "run", "ranjit.py", "--include-code", "--host", "0.0.0.0", "--port", "7860"]
